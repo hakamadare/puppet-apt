@@ -7,13 +7,13 @@ class apt::unattended-upgrade::automatic inherits apt::unattended-upgrade {
   case $lsbdistid {
     'Debian': {
       apt::conf{'50unattended-upgrades':
-        ensure  => present,
+        ensure  => $ensure,
         content => template("apt/unattended-upgrades.${lsbdistcodename}.erb"),
       }
     }
     'Ubuntu': {
       apt::conf{'50unattended-upgrades':
-        ensure  => present,
+        ensure  => $ensure,
         content => template("apt/unattended-upgrades.${lsbdistid}.erb"),
       }
     }
