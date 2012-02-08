@@ -1,5 +1,5 @@
-class apt::unattended-upgrade {
-  package {'unattended-upgrades':
-    ensure => present,
+class apt::unattended-upgrade ($ensure = present) {
+  package {"unattended-upgrades":
+    ensure => $ensure,
   }
 }
