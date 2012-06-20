@@ -1,7 +1,7 @@
 class apt::unattended-upgrade::automatic (
   $ensure = present,
   $baserepos = $apt::params::baserepos,
-  $extrarepos = undef
+  $extrarepos = false
 ) {
 
   class {
