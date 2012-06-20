@@ -19,4 +19,23 @@ class apt::params {
     Debian => ['debian-keyring', 'debian-archive-keyring'],
     Ubuntu => 'ubuntu-keyring',
   }
+
+  $baserepos = $::lsbdistid ? {
+    Debian => $::lsbdistcodename ? {
+      "lenny" => [
+        "${::lsbdistid} oldstable"
+      ],
+      "squeeze" => [
+        "${::lsbdistid} stable",
+        "${::lsbdistid} ${::lsbdistcodename}-security"
+      ]
+    },
+    Ubuntu => [
+      "${::lsbdistid} ${::lsbdistcodename}-security",
+      "${::lsbdistid} ${::lsbdistcodename}-updates",
+      "${::lsbdistid} ${::lsbdistcodename}",
+      "Canonical ${::lsbdistcodename}"
+    ],
+    default => fail( "Unable to determine base repositories for '${::lsbdistid}' system." )
+  }
 }
