@@ -28,7 +28,8 @@ class apt::params {
       "squeeze" => [
         "${::lsbdistid} stable",
         "${::lsbdistid} ${::lsbdistcodename}-security"
-      ]
+      ],
+      default => fail( "Unable to determine base repositories for '${::lsbdistid} ${::lsbdistcodename}' system." )
     },
     Ubuntu => [
       "${::lsbdistid} ${::lsbdistcodename}-security",
