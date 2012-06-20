@@ -26,6 +26,10 @@ class apt {
     }
   }
 
+  package {$apt::params::keyring_package:
+    ensure => present,
+  }
+
   # ensure only files managed by puppet be present in this directory.
   file { "/etc/apt/sources.list.d":
     ensure  => directory,
@@ -33,7 +37,7 @@ class apt {
     recurse => "${apt::params::manage_sourceslist}",
     purge   => "${apt::params::manage_sourceslist}",
     force   => "${apt::params::manage_sourceslist}",
-    ignore  => ".placeholder",
+    ignore  => $apt::params::ignore_sourceslist,
   }
 
   apt::conf {"10periodic":
