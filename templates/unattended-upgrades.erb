@@ -1,0 +1,13 @@
+// file managed by Puppet
+Unattended-Upgrade::Allowed-Origins {
+<% Array(baserepos).each do |repo| -%>
+        "<% repo -%>";
+<% end -%>
+<% if has_variable?("extrarepos") then -%>
+<% Array(extrarepos).each do |repo| -%>
+        "<% repo -%>";
+<% end -%>
+<% end -%>
+};
+
+Dpkg::Options { "--force-confold"; }
